@@ -1,0 +1,111 @@
+<Gerenciador_das_telas>:
+    Menu:
+        name: 'menu'
+    Pedido:
+        name: 'pedido'
+    Finalizar_pedido:
+        name: "finalizar_pedido"
+
+<Menu>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 15
+
+        Image:
+            source: "./imgs/pizzaLogo.png"
+            allow_stretch: False
+            size_hint_y: None
+            height: 150
+        Button:
+            text: 'Fazer Pedido'
+            on_release: app.root.current = 'pedido'
+        Button:
+            text: 'Sair'
+            on_release: app.stop()
+
+<Pedido>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+
+        ScrollView:
+            BoxLayout:
+                orientation:'vertical'
+                size_hint_y: None
+                height:self.minimum_height
+                BoxLayout:
+                    orientation:'vertical'
+                    size_hint_y: None
+                    height: 350
+                    spacing: 25
+                    Image:
+                        source: "./imgs/pizza-calabresa.jpg"
+                        allow_stretch: False
+                        size_hint_y: None
+                        height: 150
+                    Label:
+                        text: "Pizza Calabresa Grande"
+                    Label:
+                        text: "CEBOLA , MUCARELA , CALABRESA, AZEITONA, OREGANO"
+                    Label:
+                        text: "preço R$ 47.99"
+                    BoxLayout:
+                        Label:
+                            text: "Quer?"
+                        CheckBox:
+                            on_active: root.on_checkbox_Active(self, self.active)
+
+        GridLayout:
+            cols: 2
+            spacing:10
+            Label:
+                text: "Total R$"
+            Label:
+                id: preco_total
+                text: "0.00"
+            Button:
+                text: 'Menu'
+                on_release: app.root.current = 'menu'
+            Button:
+                text: 'Finalizar pedido'
+                on_release: app.root.current = 'finalizar_pedido'
+
+<Finalizar_pedido>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            Label:
+                text: "Endereço"
+            TextInput:
+                id: endereco
+                font_size:30
+                background_color:(1, 1, 1, 1)
+
+        Spinner:
+            id: forma_de_pagamento
+            text: "Forma de pagamento"
+            values: ["Cartão","Pix"]
+            on_text: root.spinner_Clicado(self.text)
+
+        Label:
+            id: lbl_forma_de_pagamento
+            text: "Forma de pagamento"
+
+        GridLayout:
+            cols: 2
+            spacing:10
+            Button:
+                text: 'Menu'
+                on_release: app.root.current = 'menu'
+            Button:
+                text: 'Pedido'
+                on_release: app.root.current = 'pedido'
+
+        Button:
+            text: 'Finalizar pedido'
+            on_release: app.stop()
